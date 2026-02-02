@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import Layout from '../components/Layout';
 
@@ -7,6 +8,7 @@ const apiClient = axios.create({
 });
 
 export default function Branches() {
+  const router = useRouter();
   const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,7 +20,7 @@ export default function Branches() {
   const fetchBranches = async () => {
     try {
       const res = await apiClient.get('/api/branches');
-      setBranches(res.data.branches || []);
+      setBranches(res.data.data || []);
       setError(null);
     } catch (err) {
       setError(err.message);
@@ -59,7 +61,11 @@ export default function Branches() {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {branches.map((branch) => (
-                  <tr key={branch.id} className="hover:bg-gray-50 transition">
+                  <tr
+                    key={branch.id}
+                    className="hover:bg-gray-50 transition cursor-pointer"
+                    onClick={() => router.push(`/branches/${branch.id}`)}
+                  >
                     <td className="px-6 py-4 text-sm text-gray-900">{branch.name}</td>
                     <td className="px-6 py-4 text-sm text-gray-600 font-mono">{branch.code}</td>
                     <td className="px-6 py-4 text-sm text-gray-600">

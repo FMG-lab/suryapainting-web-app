@@ -26,9 +26,9 @@ export default function Dashboard() {
       ]);
 
       setStats({
-        branches: branchRes.data.branches?.length || 0,
+        branches: branchRes.data.data?.length || 0,
         bookings: 0, // TODO: fetch from API
-        banks: bankRes.data.banks?.length || 0,
+        banks: bankRes.data.data?.length || 0,
       });
       setError(null);
     } catch (err) {
