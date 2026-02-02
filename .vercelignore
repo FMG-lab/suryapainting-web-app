@@ -1,0 +1,16 @@
+# Ignore everything except what we need for Next.js
+!package.json
+!package-lock.json
+!next.config.js
+!vercel.json
+!tsconfig.json
+!jsconfig.json
+!postcss.config.js
+!tailwind.config.js
+!pages
+!components
+!styles
+!public
+!lib
+!context
+!.env.local
